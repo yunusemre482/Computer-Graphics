@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<title>21726875 Yunus Emre Akgün</title>
+
+<script id="vertex-shader" type="x-shader/x-vertex">#version 300 es
+    in vec4 vPosition;
+    in vec3 vecColor;
+    out vec3 color;
+    uniform float theta;
+    
+    void
+    main()
+    {
+        float s = sin( theta );
+        float c = cos( theta );
+    
+        gl_Position.x = -s * vPosition.y + c * vPosition.x;
+        gl_Position.y =  s * vPosition.x + c * vPosition.y;
+        gl_Position.z = 0.0;
+        gl_Position.w = 1.0;
+        color = vecColor;
+    }
+    </script>
+    
+    <script id="fragment-shader" type="x-shader/x-fragment">#version 300 es
+    
+    precision mediump float;
+    
+    in vec3 color;
+    out vec4 oColor;
+    
+    void
+    main()
+    {
+        oColor = vec4(color,1.0);
+    }
+    </script>
+
+<script type="text/javascript" src="Common/webgl-utils.js"></script>
+<script type="text/javascript" src="Common/initShaders.js"></script>
+<script type="text/javascript" src="Common/MV.js"></script>
+<script type="text/javascript" src="rotatingSquare1.js"></script>
+</head>
+
+<body>
+<canvas id="gl-canvas" width="512" height="512">
+Oops ... your browser doesn't support the HTML5 canvas element
+
+
+</canvas>
+<button type="button home-button" onClick="clickEvent(this.id)"  id="toggle-button" >Toogle</button>
+<button type="button contact-button" onClick="clickEvent(this.id)" id="speed-button" >Speed Up</button>
+<button type="button home-button"  onClick="clickEvent(this.id)" id="slow-button" >Slow Down</button>
+<button type="button contact-button" onClick="clickEvent(this.id)"  id="color-button">Color</button>
+
+</body>
+</html>
